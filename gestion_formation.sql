@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 01 avr. 2026 à 17:11
+-- Généré le : mar. 21 avr. 2026 à 14:33
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -51,22 +51,40 @@ INSERT INTO `administrateur` (`id_admin`, `nom_admin`, `mail_admin`, `mdp`) VALU
 CREATE TABLE `formation` (
   `id_formation` int(11) NOT NULL,
   `titre_formation` text NOT NULL,
-  `date_debut` timestamp NOT NULL DEFAULT current_timestamp(),
-  `date_fin` timestamp NOT NULL DEFAULT current_timestamp()
+  `date_debut` date NOT NULL DEFAULT current_timestamp(),
+  `capacite` int(11) NOT NULL DEFAULT 20,
+  `placeDispo` int(11) NOT NULL DEFAULT 20,
+  `statut` enum('en inscription','en cours','terminé') NOT NULL DEFAULT 'en inscription'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `formation`
+--
+
+INSERT INTO `formation` (`id_formation`, `titre_formation`, `date_debut`, `capacite`, `placeDispo`, `statut`) VALUES
+(1, 'Développement web base', '2026-04-21', 20, 19, 'en inscription'),
+(2, 'UML base', '2026-04-22', 20, 20, 'en inscription'),
+(3, 'Développement d\'application mobile', '2026-04-21', 20, 20, 'en inscription');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `utilisateur`
+-- Structure de la table `participants`
 --
 
-CREATE TABLE `utilisateur` (
-  `id_user` int(11) NOT NULL,
-  `nom_user` text NOT NULL,
-  `mail_user` text NOT NULL,
-  `role` enum('formateur','participant','') NOT NULL
+CREATE TABLE `participants` (
+  `id_participant` int(11) NOT NULL,
+  `nom_participant` text NOT NULL,
+  `contact_participant` text NOT NULL,
+  `formation_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `participants`
+--
+
+INSERT INTO `participants` (`id_participant`, `nom_participant`, `contact_participant`, `formation_id`) VALUES
+(2, 'Kanto', 'kaka', 1);
 
 --
 -- Index pour les tables déchargées
@@ -85,10 +103,11 @@ ALTER TABLE `formation`
   ADD PRIMARY KEY (`id_formation`);
 
 --
--- Index pour la table `utilisateur`
+-- Index pour la table `participants`
 --
-ALTER TABLE `utilisateur`
-  ADD PRIMARY KEY (`id_user`);
+ALTER TABLE `participants`
+  ADD PRIMARY KEY (`id_participant`),
+  ADD KEY `formation_id` (`formation_id`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -104,13 +123,23 @@ ALTER TABLE `administrateur`
 -- AUTO_INCREMENT pour la table `formation`
 --
 ALTER TABLE `formation`
-  MODIFY `id_formation` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_formation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT pour la table `utilisateur`
+-- AUTO_INCREMENT pour la table `participants`
 --
-ALTER TABLE `utilisateur`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `participants`
+  MODIFY `id_participant` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `participants`
+--
+ALTER TABLE `participants`
+  ADD CONSTRAINT `participants_ibfk_1` FOREIGN KEY (`formation_id`) REFERENCES `formation` (`id_formation`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

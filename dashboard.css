@@ -1,0 +1,85 @@
+
+body{
+/*font-family:Arial;*/
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+background:#f4f6f9;
+padding:30px;
+}
+
+.container{
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+}
+
+.card{
+width:300px;
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:10px 10px 15px rgba(0,0,0,0.1);
+transition:1s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+box-shadow:0 8px 25px rgba(0,0,0,0.2);
+}
+
+h3{
+margin-bottom:10px;
+}
+
+.actions{
+margin-top:20px;
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+}
+
+.btn{
+text-decoration:none;
+padding:10px 14px;
+border-radius:6px;
+color:white;
+font-size:14px;
+transition:0.5s;
+}
+
+.participant{
+background:#3498db;
+}
+
+.formateur{
+background:#2ecc71;
+}
+
+.modifier{
+background:#f39c12;
+}
+
+.supprimer{
+background:#e74c3c;
+}
+
+.btn:hover{
+opacity:0.8;
+transform:scale(1.05);
+}
+
+/*statut formation*/
+#disponible{
+    background-color: rgb(147, 233, 147);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+#indisponble{
+    background-color: rgb(240, 186, 11);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+#terminé{
+    background-color: rgb(238, 130, 130);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
