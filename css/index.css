@@ -1,0 +1,57 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding: 6.5vw 18vw;
+     background: linear-gradient(rgb(136, 125, 125), white);
+}
+
+.loginForm{
+    border: .1vw solid grey;
+    border-radius: 1.25vw;
+    width: wrap;
+    height: 35vw;
+    padding: 5vw;
+    text-align: center;
+    background: transparent;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+.loginForm h2{
+    font-size: 1.5vw;
+    margin-bottom: 1vw;
+}
+
+.loginForm img{
+    margin-bottom: 1vw;
+}
+
+.loginForm input{
+    width: 95%;
+    height: 4vw;
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+    padding: 1vw;
+    border-radius: 1.25vw;
+    border: .1vw solid grey;
+}
+
+.loginForm button{
+    width: 30%;
+    height: 3vw;
+    font-size: 1.1vw;
+    border-radius: .5vw;
+    color: rgb(12, 202, 12);
+    transition: .5s;
+}
+.loginForm button:hover{
+     transform: scale(1.05);
+     transition: .5s;
+}
+form:hover{
+    box-shadow: 2vw black;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}

@@ -13,19 +13,20 @@ if (!isset($_SESSION['admin'])) {
 <head>
     <title>Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
 </head>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <body>
-        <header>
+<header>
         <nav>
-            <div style="font-weight: 700; font-size: 1.2rem; color: var(--color-accent);">
-                <img src="fond3.png" alt="erreur" width="50px" height="30px">  Gasy Tech</div>
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                <button id="theme-toggle">🌙 / ☀️</button>
-                <a href="./authentification/logout.php">Se déconnecter</a>
-                
+            <div class="logo">
+                <img src="img/Logo.png" alt="Logo">
             </div>
+            <ul>
+                <li class="theme"><a href=""><button id="theme-toggle">🌙 / ☀️</button></a></li>
+                <li class="logout"><a href="./authentification/logout.php">Se deconnecter</a></li>
+            </ul>
         </nav>
     </header>
 
