@@ -63,7 +63,7 @@ if (!isset($_SESSION['admin'])) {
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="./traitement/save_facture.php" method="POST">                       
+                    <form action="./traitement/test.php" method="POST">                       
                     <h3>Client</h3>
                         <input name="nom" placeholder="Nom client" class="form-control mb-2">
                         <input name="entreprise" value="GASY TECH" class="form-control mb-2">

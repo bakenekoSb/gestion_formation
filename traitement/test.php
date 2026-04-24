@@ -7,7 +7,7 @@ class PDF extends FPDF
     {
         // Logo ou titre
         $this->SetFont('Arial','B',20);
-        $this->Cell(0,10,'FACTURE',0,1,'C');
+        $this->Cell(0,0,'FACTURE',0,1,'C');
         $this->Ln(5);
     }
 
@@ -53,14 +53,34 @@ $pdf->SetAutoPageBreak(true,15);
 // ====================================
 // EN-TÊTE SOCIÉTÉ
 // ====================================
-$pdf->SetFont('Arial','B',16);
-$pdf->Cell(0,8,'GASY TECH',0,1,'C');
 $pdf->SetFont('Arial','',12);
-$pdf->Cell(0,6,'Anjanahary Antananarivo, Madagascar',0,1,'C');
-$pdf->Cell(0,6,'NIF/STAT: 6005717692/74908  |  RCS: 112021 007713',0,1,'C');
-$pdf->Cell(0,6,'Email: contact@gasy-tech.com',0,1,'C');
-$pdf->Ln(5);
+$pdf->Cell(0,5,'Entreprise:',0,1,'L');
+$pdf->Cell(0,-5,'GASY TECH',0,1,'C');
+$pdf->Cell(0,6,'Antananarivo',0,1,'R');
+$pdf->Cell(0,10,'Adresse:',0,1,'L');
+$pdf->Cell(0,-10,'Anjanahary Antananarivo, Madagascar',0,1,'C');
+$pdf->Cell(0,28,'NIF/STAT:',0,1,'L');
+$pdf->Cell(0,-28,'6005717692/74908',0,1,'C');
+$pdf->SetFont('Arial','U',12);
+$pdf->Cell(0,45,'RCS:',0,1,'L');
+$pdf->SetFont('Arial','',12);
+$pdf->Cell(0,-45,'112021 007713',0,1,'C');
+$pdf->Cell(0,48,'Doit',0,1,'R');
+$pdf->SetFont('Arial','U',12);
+$pdf->Cell(0,-33,'Email:',0,1,'L');
+$pdf->SetTextColor(200,0,200);
+$pdf->Cell(0,33,'contact@gasy-tech.com',0,1,'C');
+$pdf->SetFont('Arial','',12);
+$pdf->SetTextColor(0,0,0);
+$pdf->Cell(0,-33,'ORANGE DIGITAL CENTER',0,1,'R');
+$pdf->Cell(0,45,'Gare Soarano',0,1,'R');
 
+$pdf->SetFont('Arial','B',12);
+$pdf->Cell(0,-20,'Date de formation achevee : '.$date_debut.' au '.$date_fin,0,1,'C');
+$pdf->Cell(0,35,'N° Proforma GT : PRO-F'.$date_fin,0,1,'C');
+$pdf->Cell(0,-20,'N° de BC : DREECI/IOE-03.03.N0250011',0,1,'C');
+$pdf->Ln(30);
+/*
 // Coordonnées bancaires
 $pdf->SetFillColor(240,240,240);
 $pdf->SetFont('Arial','B',12);
@@ -98,20 +118,17 @@ $pdf->Cell(0,12,'FACTURE',0,1,'C');
 $pdf->SetFont('Arial','B',14);
 $pdf->Cell(0,8,'Antananarivo le '.date('d/m/Y',strtotime($date_facture)),0,1,'C');
 $pdf->Ln(5);
-
+*/
 // ====================================
 // TABLEAU PRESTATIONS
 // ====================================
 $pdf->SetFont('Arial','B',11);
-$pdf->SetFillColor(0,124,186);
-$pdf->SetTextColor(255,255,255);
-$pdf->Cell(100,8,'Désignation',1,0,'C',true);
-$pdf->Cell(25,8,'Quantité',1,0,'C',true);
-$pdf->Cell(30,8,'Montant',1,0,'C',true);
-$pdf->Cell(35,8,'Total TTC',1,1,'C',true);
-
-$pdf->SetTextColor(0,0,0);
-$pdf->SetFillColor(255,255,255);
+//$pdf->SetFillColor(0,124,186);
+//$pdf->SetTextColor(255,255,255);
+$pdf->Cell(100,8,'Designation',1,0,'C');
+$pdf->Cell(25,8,'Quantite',1,0,'C');
+$pdf->Cell(30,8,'Montant',1,0,'C');
+$pdf->Cell(35,8,'Total TTC',1,1,'C');
 
 // Ligne 1 - Service
 $pdf->SetFont('Arial','',10);
@@ -127,25 +144,23 @@ $pdf->Cell(30,8,formatNumber($indemnite),1,0,'R');
 $pdf->Cell(35,8,formatNumber($montant_indemnite),1,1,'R');
 
 // Ligne TVA
-$pdf->SetFillColor(249,249,249);
-$pdf->Cell(100,8,'TVA 20%',1,0,'L',true);
-$pdf->Cell(25,8,'',1,0,'C',true);
-$pdf->Cell(30,8,formatNumber($montant_service + $montant_indemnite),1,0,'R',true);
-$pdf->Cell(35,8,formatNumber($tva_total),1,1,'R',true);
+$pdf->Cell(100,8,'TVA 20%',1,0,'L');
+$pdf->Cell(25,8,'',1,0,'C');
+$pdf->Cell(30,8,formatNumber($montant_service + $montant_indemnite),1,0,'R');
+$pdf->Cell(35,8,formatNumber($tva_total),1,1,'R');
 
 // TOTAL
 $pdf->SetFont('Arial','B',12);
-$pdf->SetFillColor(232,244,248);
-$pdf->Cell(130,10,'TOTAL',1,0,'R',true);
+$pdf->Cell(155,8,'TOTAL',1,0,'R');
 $pdf->SetFont('Arial','B',14);
-$pdf->Cell(45,10,formatNumber($total).' Ar',1,1,'C',true);
+$pdf->Cell(35,8,formatNumber($total).' Ar',1,1,'C');
 $pdf->Ln(5);
 
 // ====================================
 // MONTANT EN LETTRES
 // ====================================
 $pdf->SetFont('Arial','I',12);
-$pdf->Cell(0,8,'Arrêté à la somme de " Neuf cent quatre-vingt-dix mille ariary "',0,1,'C');
+$pdf->Cell(0,8,'Arrêté à la somme de " Neuf cent quatre-vingt-dix mille ariary "',0,1);
 $pdf->Ln(15);
 
 // ====================================
@@ -158,7 +173,7 @@ $pdf->Cell(0,6,'N° de BC : '.$numero_bc,0,1,'C');
 $pdf->Ln(10);
 
 $pdf->SetFont('Arial','B',11);
-$pdf->Cell(190,8,'Conditions de paiement:',1,1,'C',true);
+$pdf->Cell(190,8,'Conditions de paiement:',1,1,'C');
 $pdf->SetFont('Arial','',10);
 $pdf->Cell(190,8,'Les modes de paiements acceptés sont le virement bancaire et Orange Money',1,1,'C');
 
