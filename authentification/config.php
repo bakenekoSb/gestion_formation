@@ -1,6 +1,6 @@
 <?php
 $host = "localhost";
-$dbname = "gestion_formation";
+$dbname = "gestion_formation2";
 $user = "root";
 $pass = "";
 

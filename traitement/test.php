@@ -7,7 +7,7 @@ class PDF extends FPDF
     {
         // Logo ou titre
         $this->SetFont('Arial','B',20);
-        $this->Cell(0,10,'GASY TECH',0,1,'C');
+        $this->Cell(0,10,'FACTURE',0,1,'C');
         $this->Ln(5);
     }
 
