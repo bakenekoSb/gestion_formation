@@ -76,49 +76,22 @@ $pdf->Cell(0,-33,'ORANGE DIGITAL CENTER',0,1,'R');
 $pdf->Cell(0,45,'Gare Soarano',0,1,'R');
 
 $pdf->SetFont('Arial','B',12);
-$pdf->Cell(0,-20,'Date de formation achevee : '.$date_debut.' au '.$date_fin,0,1,'C');
-$pdf->Cell(0,35,'N° Proforma GT : PRO-F'.$date_fin,0,1,'C');
-$pdf->Cell(0,-20,'N° de BC : DREECI/IOE-03.03.N0250011',0,1,'C');
-$pdf->Ln(30);
-/*
-// Coordonnées bancaires
-$pdf->SetFillColor(240,240,240);
+$pdf->Cell(40,0,'',0,0);
+$pdf->Cell(60,0,'Date de formation achevee : ',0,0);
+$pdf->SetFont('Arial','',12);
+$pdf->Cell(0,0,$date_debut.' au '.$date_fin,0,1);
 $pdf->SetFont('Arial','B',12);
-$pdf->Cell(190,25,'RAMAHEFARITO CEO et Géra',1,0,'C',true);
-$pdf->Ln();
-$pdf->SetFont('Arial','',10);
-$pdf->Cell(95,6,'BANQUE : BRED Madagasikara',1,0);
-$pdf->Cell(95,6,'Orange Money : 032 05 504 93',1,0);
-$pdf->Ln();
-$pdf->Cell(95,6,'RIB : 00008 00024 05003023618 71',1,0);
-$pdf->Cell(95,6,'NOM : GASY TECH',1,0);
-$pdf->Ln(15);
-
-// ====================================
-// CLIENT / FOURNISSEUR
-// ====================================
+$pdf->Cell(40,0,'',0,0);
+$pdf->Cell(40,15,'N° Proforma GT : ',0,0,'C');
+$pdf->SetFont('Arial','',12);
+$pdf->Cell(0,15,'PRO-F'.$date_fin,0,1);
 $pdf->SetFont('Arial','B',12);
-$pdf->Cell(95,25,'Le Client',1,0,'C');
-$pdf->Cell(95,25,'Le Fournisseur',1,0,'C');
-$pdf->Ln();
-
-$pdf->SetFont('Arial','',11);
-$pdf->SetXY(17, $pdf->GetY()-25);
-$pdf->MultiCell(85,5,$client,0,'L');
-
-$pdf->SetXY(112, $pdf->GetY()-20);
-$pdf->MultiCell(85,5,"GASY TECH\nAnjanahary Antananarivo, Madagascar",0,'L');
+$pdf->Cell(40,0,'',0,0);
+$pdf->Cell(25,0,'N° de BC : ',0,0,'C');
+$pdf->SetFont('Arial','',12);
+$pdf->Cell(0,0,'DREECI/IOE-03.03.N0250011',0,1);
 $pdf->Ln(10);
 
-// ====================================
-// TITRE ET DATE
-// ====================================
-$pdf->SetFont('Arial','B',20);
-$pdf->Cell(0,12,'FACTURE',0,1,'C');
-$pdf->SetFont('Arial','B',14);
-$pdf->Cell(0,8,'Antananarivo le '.date('d/m/Y',strtotime($date_facture)),0,1,'C');
-$pdf->Ln(5);
-*/
 // ====================================
 // TABLEAU PRESTATIONS
 // ====================================
@@ -159,23 +132,25 @@ $pdf->Ln(5);
 // ====================================
 // MONTANT EN LETTRES
 // ====================================
-$pdf->SetFont('Arial','I',12);
-$pdf->Cell(0,8,'Arrêté à la somme de " Neuf cent quatre-vingt-dix mille ariary "',0,1);
-$pdf->Ln(15);
+$pdf->SetFont('Arial','',12);
+$pdf->Cell(0,8,'Arrete a la somme de " Neuf cent quatre-vingt-dix mille ariary "',0,1);
+$pdf->Ln(9);
+$pdf->SetFont('Arial','B',12);
+$pdf->Cell(0,0,'Conditions de paiement',0,1);
+$pdf->SetFont('Arial','',12);
+$pdf->Cell(0,10,'Les modes de paiements acceptes sont le virement bancaire et Orange Money',0,1);
+$pdf->Ln(5);
 
-// ====================================
-// PIED DE PAGE
-// ====================================
-$pdf->SetFont('Arial','',10);
-$pdf->Cell(0,6,'Date de formation achevée : '.date('d/m/y',strtotime($date_debut)).' au '.date('d/m/y',strtotime($date_fin)),0,1,'C');
-$pdf->Cell(0,6,'N° Proforma GT : '.$numero_proforma,0,1,'C');
-$pdf->Cell(0,6,'N° de BC : '.$numero_bc,0,1,'C');
-$pdf->Ln(10);
-
-$pdf->SetFont('Arial','B',11);
-$pdf->Cell(190,8,'Conditions de paiement:',1,1,'C');
-$pdf->SetFont('Arial','',10);
-$pdf->Cell(190,8,'Les modes de paiements acceptés sont le virement bancaire et Orange Money',1,1,'C');
+$pdf->SetFont('Arial','B',12);
+$pdf->Cell(0,0,'Details bancaire',0,1);
+$pdf->SetFont('Arial','',12);
+$pdf->Cell(0,15,' - BANQUE : BRED Madagasikara',0,1);
+$pdf->Cell(0,0,' - RIB : 00008 00024 05003023618 71',0,1);
+$pdf->Cell(0,15,' - NOM : GASY TECH',0,1);
+$pdf->SetFont('Arial','B',12);
+$pdf->Cell(50,0,'Numero Orange money: ',0,0);
+$pdf->SetFont('Arial','',12);
+$pdf->Cell(0,0,'032 05 504 93',0,1);
 
 // ====================================
 // OUTPUT
