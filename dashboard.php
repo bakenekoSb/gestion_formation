@@ -67,13 +67,7 @@ if (!isset($_SESSION['admin'])) {
                     <form action="./traitement/test.php" method="POST">                       
                     <h3>Client</h3>
                         <input name="nom" placeholder="Nom client" class="form-control mb-2">
-                        <input name="entreprise" value="GASY TECH" class="form-control mb-2">
                         <input name="adresse" placeholder="Adresse" class="form-control mb-2">
-                        <input name="nif" value="6005717692/74908 112021 0 07713" class="form-control mb-2">
-                        <input name="rcs" value="2024 A 01833" class="form-control mb-2">
-                        <input name="email" placeholder="Email" class="form-control mb-3">
-                        <input name="proforma" placeholder="N° Proforma" class="form-control mb-3">
-                        <input name="bc" placeholder="N° BC" class="form-control mb-3">
 
                         <h3>Formation</h3>
                         <label>Date début</label>
@@ -81,27 +75,15 @@ if (!isset($_SESSION['admin'])) {
                         <label>Date fin</label>
                         <input type="date" id="date_fin" name="date_fin" placeholder="Date fin" class="form-control mb-2">
                         <input name="designation" placeholder="Désignation" class="form-control mb-2">
-                        <input type="number" name="jours" placeholder="Nombre de jours" class="form-control mb-3" readonly>
 
                         <h3>Frais</h3>
                         <input type="number" name="prix" placeholder="Prix unitaire" class="form-control mb-3">
                         <input type="number" name="indemnite" placeholder="Indemnité" class="form-control mb-2">
                         <input type="number" name="tva" placeholder="TVA" class="form-control mb-3">
-                        <button class="btn btn-success" name="btn_facture">Générer PDF</button>
+                        <button class="btn btn-success" name="btn_apercu">Aperçu PDF</button>
+                        <button class="btn btn-success" name="btn_telecharge">Télécharger PDF</button>
 
                     </form>
-                        <script>
-                        //pour calculer le nombre de jours entre deux dates
-                        document.getElementById("date_fin").addEventListener("change", function(){
-                            let debut = new Date(document.getElementById("date_debut").value);
-                            let fin = new Date(document.getElementById("date_fin").value);
-                            if(debut && fin){
-                                let diff = fin - debut;
-                                let jours = diff / (1000 * 60 * 60 * 24) + 1;
-                                document.getElementById("jours").value = jours;
-                            }
-                        });
-                        </script>
                 </div>
             </div>
         </div>

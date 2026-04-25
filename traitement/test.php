@@ -3,21 +3,9 @@ require('./../fpdf/fpdf.php'); // Inclure FPDF
 
 class PDF extends FPDF
 {
-    function Header()
-    {
-        // Logo ou titre
-        $this->SetFont('Arial','B',20);
-        $this->Cell(0,0,'FACTURE',0,1,'C');
-        $this->Ln(5);
+    function Header(){
+    $this->Ln(5);
     }
-
-    function Footer()
-    {
-        $this->SetY(-15);
-        $this->SetFont('Arial','I',8);
-        $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
-    }
-
     // Largeurs des colonnes
     var $widths;
 
@@ -27,7 +15,7 @@ class PDF extends FPDF
     }
 
     // Fonction principale pour afficher une ligne
-    function Row($data) {
+    function Row($data,$test) {
         $nb = 0;
 
         // Calcul du nombre de lignes max
@@ -45,8 +33,10 @@ class PDF extends FPDF
             $x = $this->GetX();
             $y = $this->GetY();
 
-            // Bordure
-            $this->Rect($x, $y, $w, $h);
+            if($data[$i]!= "" && $test == true){
+                // Bordure
+                $this->Rect($x, $y, $w, $h);
+            }
 
             // Texte
             $this->MultiCell($w, 5, $data[$i], 0,'C');
@@ -126,7 +116,6 @@ class PDF extends FPDF
 }
 
 // Récupérer les données POST
-$numero_bc = $_POST['bc'];
 $date_facture = date('d/m/Y');
 $date1 = date('Y-m');
 $client = $_POST['nom'];
@@ -186,160 +175,121 @@ $pdf->SetAutoPageBreak(true,15);
 // ====================================
 // EN-TÊTE SOCIÉTÉ
 // ====================================
-$pdf->SetFont('Arial','',12);
+$pdf->SetFont('Arial','',11);
 $pdf->Cell(0,5,'Entreprise:',0,1);
 $pdf->Cell(0,-5,'GASY TECH',0,1,'C');
-$pdf->Cell(0,6,'Antananarivo le '.$date_facture,0,1,'R');
+$pdf->Cell(0,6,'Antananarivo le '.$date_facture,0,0,'R');
+$pdf->SetFont('Arial','U',11);
+$pdf->Cell(0,6,$date_facture,0,1,'R');
+$pdf->SetFont('Arial','',11);
 $pdf->Cell(0,10,'Adresse:',0,1);
 $pdf->Cell(0,-10,'Anjanahary Antananarivo, Madagascar',0,1,'C');
 $pdf->Cell(0,28,'NIF/STAT:',0,1);
 $pdf->Cell(0,-28,'6005717692/74908',0,1,'C');
-$pdf->SetFont('Arial','U',12);
+$pdf->SetFont('Arial','U',11);
 $pdf->Cell(0,45,'RCS:',0,1);
-$pdf->SetFont('Arial','',12);
+$pdf->SetFont('Arial','',11);
 $pdf->Cell(0,-45,'112021 007713',0,1,'C');
 $pdf->Cell(0,48,'Doit',0,1,'R');
-$pdf->SetFont('Arial','U',12);
+$pdf->SetFont('Arial','U',11);
 $pdf->Cell(0,-33,'Email:',0,1,);
 $pdf->SetTextColor(200,0,200);
 $pdf->Cell(0,33,'contact@gasy-tech.com',0,1,'C');
-$pdf->SetFont('Arial','',12);
+$pdf->SetFont('Arial','',11);
 $pdf->SetTextColor(0,0,0);
 $pdf->Cell(0,-33,$client,0,1,'R');
 $pdf->Cell(0,45,$adresse,0,1,'R');
 
-$pdf->SetFont('Arial','B',12);
+//prendre position de y
+$y = $pdf->GetY();
+//Rect(x,y,w,h) → bordure rectangle ;  et y (coordonnées du coin supérieur gauche), width (largeur) et height (hauteur)
+$pdf->Rect(50,$y-18, 120, 28);
+
+$pdf->SetFont('Arial','B',11);
 $pdf->Cell(39,0,'',0,0);
-$pdf->Cell(60,0,'Date de formation achevee : ',0,0);
-$pdf->SetFont('Arial','',12);
-$pdf->Cell(0,0,$date_debut.' au '.$date_fin,0,1);
-$pdf->SetFont('Arial','B',12);
+$pdf->Cell(60,-25,'Date de formation achevee : ',0,0);
+$pdf->SetFont('Arial','',11);
+$pdf->Cell(0,-25,$date_debut.' au '.$date_fin,0,1);
+$pdf->SetFont('Arial','B',11);
 $pdf->Cell(40,0,'',0,0);
-$pdf->Cell(40,15,'Num Proforma GT : ',0,0,'C');
-$pdf->SetFont('Arial','',12);
-$pdf->Cell(0,15,'PRO-F'.$date1,0,1);
-$pdf->SetFont('Arial','B',12);
+$pdf->Cell(40,40,'Num Proforma GT : ',0,0,'C');
+$pdf->SetFont('Arial','',11);
+$pdf->Cell(0,40,'PRO-F'.$date1,0,1);
+$pdf->SetFont('Arial','B',11);
 $pdf->Cell(41,0,'',0,0);
-$pdf->Cell(25,0,'Num de BC : ',0,0,'C');
-$pdf->SetFont('Arial','',12);
-$pdf->Cell(0,0,$numero_bc,0,1);
-$pdf->Ln(10);
+$pdf->Cell(25,-25,'Num de BC : ',0,0,'C');
+$pdf->SetFont('Arial','',11);
+$pdf->Cell(0,-25,'DREECI/IOE-03.03.N0250011',0,1);
+$pdf->Ln(25);
 
 // ====================================
 // TABLEAU PRESTATIONS
 // ====================================
-/* Largeurs des colonnes
-$w = [90, 30, 35, 35];
-$designation = $service."\n\nIndeminite de repas et transport lkjhg-iolpsdgdfhfjyj\n\nTVA";
-$qtt = $quantite."\n\n".$quantite."\n\n".$tva."%";
-$prix = formatNumber($montant_unitaire)."\n\n".formatNumber($indemnite)."\n\n".$tva_total;
-$ttc = formatNumber($montant_service)."\n\n".formatNumber($montant_indemnite)."\n\n".$tva_total;
-
-// =====================
-// 🔹 CALCUL HAUTEUR
-// =====================
-$lineHeight = 6;
-
-$nb = max(
-    substr_count($designation, "\n"),
-    substr_count($qtt, "\n"),
-    substr_count($prix, "\n"),
-    substr_count($ttc, "\n")
-) + 1;
-
-$h = $lineHeight * $nb;
-
-// Position de départ
-$x = $pdf->GetX();
-$y = $pdf->GetY();
-
-// =====================
-// 🔹 COLONNE 1
-// =====================
-/*Rect() → bordure extérieure
-SetXY() → éviter le décalage
-
-$pdf->Rect($x, $y, $w[0], $h);
-$pdf->MultiCell($w[0], $lineHeight, $designation, 0, 'C');
-
-// =====================
-// 🔹 COLONNpdf->E 2
-// =====================
-$x += $w[0];
-$pdf->SetXY($x, $y);
-$pdf->Rect($x, $y, $w[1], $h);
-$pdf->MultiCell($w[1], $lineHeight, $qtt, 0, 'C');
-
-// =====================
-// 🔹 COLONNE 3
-// =====================
-$x += $w[1];
-$pdf->SetXY($x, $y);
-$pdf->Rect($x, $y, $w[2], $h);
-$pdf->MultiCell($w[2], $lineHeight, $prix, 0, 'R');
-
-// =====================
-// 🔹 COLONNE 4
-// =====================
-$x += $w[2];
-$pdf->SetXY($x, $y);
-$pdf->Rect($x, $y, $w[3], $h);
-$pdf->MultiCell($w[3], $lineHeight, $ttc, 0, 'R');
-
-// =====================
-// 🔹 LIGNE TOTAL
-// =====================
-//$pdf->Ln($h);
-
-$pdf->SetFont('Arial','B',11);
-
-// cellule vide (fusion visuelle)
-$pdf->Cell($w[0] + $w[1], 8, "", 0);
-
-// Total
-$pdf->Cell($w[2], 8, "Total", 1, 0, 'C');
-$pdf->Cell($w[3], 8, number_format($total, 2, ',', ' ')." Ar", 1, 0, 'R');
-*/
 // Définir les largeurs
 $pdf->SetWidths([100, 25, 30, 35]);
-
-$pdf->SetFont('Arial','B',12);
+$test = true;
+$pdf->SetFont('Arial','B',11);
 // En-tête
-$pdf->Row(["Designation", "Quantite (Nb de jours)", "Montant en ariary", "Montant Total (TTC)"]);
+$pdf->Row(["Designation", "Quantite (Nb de jours)", "Montant en ariary", "Montant Total (TTC)"],$test);
 
-$pdf->SetFont('Arial','',12);
+$pdf->SetFont('Arial','',11);
 //Données
-$pdf->Row([$service, $quantite, formatNumber($montant_unitaire), formatNumber($montant_service)]);
-$pdf->Row(['Indeminite de repas et transport', $quantite, formatNumber($indemnite), formatNumber($montant_indemnite)]);
-$pdf->Row(['TVA', $tva, formatNumber($tva_total), formatNumber($tva_total)]);
-$pdf->Row(['','','Total', formatNumber($total)]);
-
+$pdf->Row([$service, $quantite, formatNumber($montant_unitaire), formatNumber($montant_service)],$test);
+$pdf->Row(['Indeminite de repas et transport', $quantite, formatNumber($indemnite), formatNumber($montant_indemnite)],$test);
+$pdf->Row(['TVA', $tva.'%', formatNumber($tva_total), formatNumber($tva_total)],$test);
+$pdf->Row(['','','Total', formatNumber($total)],$test);
+$pdf->Ln(5);
 // ====================================
 // MONTANT EN LETTRES
 // ====================================
-$pdf->SetFont('Arial','',12);
-$pdf->Cell(0,8,'Arrete a la somme de " Neuf cent quatre-vingt-dix mille ariary "',0,1);
+$pdf->SetFont('Arial','B',11);
+$pdf->Cell(45,8,'Arrete a la somme de ',0,0);
+$pdf->SetFont('Arial','',11);
+$pdf->MultiCell(0,8,'" Neuf cent quatre-vingt-dix mille ariary"',0);
 $pdf->Ln(9);
-$pdf->SetFont('Arial','B',12);
+$pdf->SetFont('Arial','B',11);
 $pdf->Cell(0,0,'Conditions de paiement',0,1);
-$pdf->SetFont('Arial','',12);
+$pdf->SetFont('Arial','',11);
 $pdf->Cell(0,10,'Les modes de paiements accptes sont le virement bancaire et Orange Money',0,1);
-$pdf->Ln(5);
+$pdf->Ln(10);
 
-$pdf->SetFont('Arial','B',12);
+//prendre position de y
+$y = $pdf->GetY();
+
+$pdf->Rect(10,$y-5, 195, 45);
+
+$pdf->SetFont('Arial','B',11);
 $pdf->Cell(0,0,'Details bancaire',0,1);
-$pdf->SetFont('Arial','',12);
+$pdf->SetFont('Arial','',11);
 $pdf->Cell(0,15,' - BANQUE : BRED Madagasikara',0,1);
 $pdf->Cell(0,0,' - RIB : 00008 00024 05003023618 71',0,1);
 $pdf->Cell(0,15,' - NOM : GASY TECH',0,1);
-$pdf->SetFont('Arial','B',12);
+$pdf->SetFont('Arial','B',11);
 $pdf->Cell(50,0,'Numero Orange money: ',0,0);
-$pdf->SetFont('Arial','',12);
+$pdf->SetFont('Arial','',11);
 $pdf->Cell(0,0,'032 05 504 93',0,1);
+$pdf->Ln(20);
+
+// ====================================
+// FOOTER
+// ====================================
+$x = $pdf->GetX();
+$pdf->SetWidths([$x,55,40, 75]);
+$test = false;
+$pdf->SetFont('Arial','U',11);
+$pdf->Row(['','Le Client','','Le Fournisseur'],$test);
+$pdf->Ln(15);
+//$pdf->Row(['','','','']);
+$pdf->SetFont('Arial','',11);
+$pdf->Row(['','','','RAMAHEFARITOLOTRA Rafaly Antoni CEO et Gerant de Gasy Tech'],$test);
 
 // ====================================
 // OUTPUT
 // ====================================
 $filename = 'facture_gasy_tech_' . date('Y-m-d_His') . '.pdf';
-$pdf->Output();
+if(isset($_POST['btn_apercu'])){
+    $pdf->Output();//Affiche
+}else if(isset($_POST['btn_telecharge'])){
+    $pdf->Output('D',$filename); // télécharger
+}
 ?>
