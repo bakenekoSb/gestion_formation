@@ -1,5 +1,6 @@
 <?php
-require('./../fpdf/fpdf.php'); // Inclure FPDF
+require('./../fpdf/fpdf.php'); // Inclure 
+require './../authentification/config.php';
 
 class PDF extends FPDF
 {
@@ -237,12 +238,20 @@ $date1 = date('Y-m');
 $client = $_POST['nom'];
 $client = $_POST['nom'];
 $adresse = $_POST['adresse'];
-$service = $_POST['designation'] ?? 'Formation Intelligence artificielle appliquée aux métiers';
 $montant_unitaire = (double)($_POST['prix']);
 $indemnite = (double)($_POST['indemnite']);
 $date_debut = $_POST['date_debut'];
 $date_fin = $_POST['date_fin'];
 $tva = (int)($_POST['tva']);
+$designation = $_POST['designation'];//récupère l'id de la formation choisie
+//selectionne le titre de la formation choisie grace à l'id
+$sql = "SELECT titre_formation FROM formation WHERE id_formation = :id";
+$res = $pdo->prepare($sql);
+$res->bindValue('id', $designation);
+$res->execute();
+$data = $res->fetch();
+
+$designation = $data['titre_formation'];
 
 // Calculs
 if($date_debut && $date_fin){
@@ -350,7 +359,7 @@ $pdf->Row(["Designation", "Quantite (Nb de jours)", "Montant en ariary", "Montan
 
 $pdf->SetFont('Arial','',11);
 //Données
-$pdf->Row([$service, $quantite, formatNumber($montant_unitaire), formatNumber($montant_service)],$test);
+$pdf->Row([$designation, $quantite, formatNumber($montant_unitaire), formatNumber($montant_service)],$test);
 $pdf->Row(['Indeminite de repas et transport', $quantite, formatNumber($indemnite), formatNumber($montant_indemnite)],$test);
 $pdf->Row(['TVA', $tva.'%', formatNumber($tva_total), formatNumber($tva_total)],$test);
 $pdf->Row(['','','Total', formatNumber($total)],$test);

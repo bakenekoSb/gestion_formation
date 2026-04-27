@@ -74,7 +74,19 @@ if (!isset($_SESSION['admin'])) {
                         <input type="date" id="date_debut" name="date_debut" placeholder="Date début" class="form-control mb-2">
                         <label>Date fin</label>
                         <input type="date" id="date_fin" name="date_fin" placeholder="Date fin" class="form-control mb-2">
-                        <input name="designation" placeholder="Désignation" class="form-control mb-2">
+                        <select name="designation" class="form-control mb-3">
+                            <option value="">Choisir la formation</option>
+                            <?php
+                                //prend tous les id de formation sans doublons et afficher les noms correspondants
+                                $sqlCategorie = "SELECT DISTINCT id_formation,titre_formation FROM formation";
+                                $stmt = $pdo->prepare($sqlCategorie);
+                                $stmt->execute();
+                                $resultCategorie = $stmt->fetchAll();//le resultat est sous forme de tableau
+
+                                foreach($resultCategorie as $r):?>
+                                    <option value="<?php echo $r['id_formation']; ?>"><?php echo $r['titre_formation']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
 
                         <h3>Frais</h3>
                         <input type="number" name="prix" placeholder="Prix unitaire" class="form-control mb-3">
