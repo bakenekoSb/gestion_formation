@@ -15,6 +15,7 @@ if (!isset($_SESSION['admin'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <body>
@@ -25,12 +26,19 @@ if (!isset($_SESSION['admin'])) {
             </div>
             <ul>
                 <li class="theme"><a href=""><button id="theme-toggle">🌙 / ☀️</button></a></li>
-                <li class="logout"><a href="./authentification/logout.php">Sortie</a></li>
-                <li class="logout"><div id="sidebar">☰</div></li>
+                <li class="btnheader" id="sortie"><a href="./authentification/logout.php"><i class="fa-solid fa-right-from-bracket"></i></a></li>
+                <li class="btnheader" onclick="Menu()"><div>☰</div></li>
             </ul>
         </nav>
     </header>
-
+    <div id="sidebar" class="sidebar">
+            <div class="closebtn" onclick="Menu()">✖️</div>
+            <a href="#">Liste Formation</a>
+            <a href="#">Ajouter Formation</a>
+            <a href="#">Fiche Formation</a>
+            <a href="#">Generation Proforma</a>
+            <a href="#">Generation Facture</a>
+        </div>
     <h2>Bienvenue <?php echo $_SESSION['admin']; ?> 🎉</h2>
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formModal" >Ajouter formation</button>
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#factureModal" >Créer facture</button>
@@ -170,6 +178,6 @@ if (!isset($_SESSION['admin'])) {
             echo "Aucune formation";
         } ?>
     </div>
-
+<script src="js/dashboard.js"></script>
 </body>
 </html>

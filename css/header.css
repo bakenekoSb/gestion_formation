@@ -27,13 +27,14 @@ nav ul {
     list-style: none;
 }
 
-.logout {
+.btnheader {
     border:.1vw solid grey;
     padding: .5vw 0vw;
     border-radius: .5vw;
-    width: 10vw;
+    width: 3vw;
     height: 3vw;
     text-align: center;
+    font-size: 1vw;
 }
 
 nav ul li a {
@@ -47,4 +48,12 @@ nav ul li a {
     width: 12vw;
     height: 3vw;
     text-align: center;
+}
+
+#sortie{
+    background: rgb(245, 57, 57);
+}
+
+.btnheader:hover{
+    transform: scale(1.1);
 }
