@@ -23,7 +23,7 @@ nav {
 nav ul {
     margin-left: 25vw;
     display: flex;
-    gap: 5vw;
+    gap: 3vw;
     list-style: none;
 }
 
