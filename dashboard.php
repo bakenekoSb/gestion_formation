@@ -25,7 +25,8 @@ if (!isset($_SESSION['admin'])) {
             </div>
             <ul>
                 <li class="theme"><a href=""><button id="theme-toggle">🌙 / ☀️</button></a></li>
-                <li class="logout"><a href="./authentification/logout.php">Se deconnecter</a></li>
+                <li class="logout"><a href="./authentification/logout.php">Sortie</a></li>
+                <li class="logout"><div id="sidebar">☰</div></li>
             </ul>
         </nav>
     </header>
