@@ -112,10 +112,12 @@ transform:scale(1.05);
     padding: 15px;
     text-decoration: none;
     color: white;
+    transition: .5s;
   }
 
   .sidebar a:hover {
     background: #5f5f5f;
+    transition: .5s;
   }
 
   .content {
@@ -125,7 +127,7 @@ transform:scale(1.05);
 
   .hbienvenue{
     text-align: center;
-    font-size: 2.5vw;
+    font-size: 3vw;
   }
 
   .section_pple{
@@ -141,12 +143,20 @@ transform:scale(1.05);
             rgba(0, 0, 0, 0.75) 50%,  
             rgba(0, 0, 0, 1) 100%
         ),
-        url("../img/section_ppl_img.jpeg");
+        url("../img/Untitled.jpeg");
     background-size: cover;
     background-position: center;
   }
   .contenue_section {
+    border: gray solid .2vw;
     color: white;
-    max-width: 400px;
+    max-width: 480px;
     margin-right: 80px;
+    padding: 3vw;
+    border-radius: .8vw;
+  }
+.contenue_section p {
+  font-size: 1.5vw;
+  text-align: justify;
+  margin-top: 2vw;
 }

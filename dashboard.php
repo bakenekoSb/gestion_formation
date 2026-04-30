@@ -13,7 +13,9 @@ if (!isset($_SESSION['admin'])) {
         <div class="contenue_section">
 
             <h2 class="hbienvenue">Bienvenue <?php echo $_SESSION['admin']; ?> </h2>
-            <p>Que voulez vous faire aujourd'hui??</p>
+            <p>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae nesciunt cumque error dolorum voluptatum deleniti modi obcaecati suscipit omnis libero.
+            </p>
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formModal" >Ajouter formation</button>
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#factureModal" >Créer facture</button>
         </div>
