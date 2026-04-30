@@ -129,8 +129,24 @@ transform:scale(1.05);
   }
 
   .section_pple{
-    background: rgb(87, 86, 86);
     min-height: 100dvh;
     color: white;
-    padding: 7vw;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; 
+     background:
+        linear-gradient(
+            to right,
+            rgba(0, 0, 0, 0) 20%,  
+            rgba(0, 0, 0, 0.75) 50%,  
+            rgba(0, 0, 0, 1) 100%
+        ),
+        url("../img/section_ppl_img.jpeg");
+    background-size: cover;
+    background-position: center;
   }
+  .contenue_section {
+    color: white;
+    max-width: 400px;
+    margin-right: 80px;
+}

@@ -10,10 +10,14 @@ if (!isset($_SESSION['admin'])) {
     <?php include 'includes/head.php'; ?>
     <?php include 'includes/header.php'; ?>
     <section class="section_pple">
-        <h2 class="hbienvenue">Bienvenue <?php echo $_SESSION['admin']; ?> </h2>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formModal" >Ajouter formation</button>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#factureModal" >Créer facture</button>
-    </section>
+        <div class="contenue_section">
+
+            <h2 class="hbienvenue">Bienvenue <?php echo $_SESSION['admin']; ?> </h2>
+            <p>Que voulez vous faire aujourd'hui??</p>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formModal" >Ajouter formation</button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#factureModal" >Créer facture</button>
+        </div>
+        </section>
         
     <!-- popup formulaire pour ajout de formation-->
     <div class="modal fade" id="formModal">
