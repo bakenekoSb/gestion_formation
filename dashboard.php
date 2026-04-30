@@ -7,19 +7,7 @@ if (!isset($_SESSION['admin'])) {
     exit;
 }
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./css/header.css">
-    <link rel="stylesheet" href="./css/dashboard.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<body>
-    
+    <?php include 'includes/head.php'; ?>
     <?php include 'includes/header.php'; ?>
     <h2>Bienvenue <?php echo $_SESSION['admin']; ?> 🎉</h2>
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formModal" >Ajouter formation</button>
@@ -160,6 +148,4 @@ if (!isset($_SESSION['admin'])) {
             echo "Aucune formation";
         } ?>
     </div>
-<script src="js/dashboard.js"></script>
-</body>
-</html>
+    <?php include 'includes/foot.php'; ?>

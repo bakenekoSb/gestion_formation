@@ -12,7 +12,7 @@
     </header>
     <div id="sidebar" class="sidebar">
             <div class="closebtn" onclick="Menu()">✖️</div>
-            <a href="#">Liste Formation</a>
+            <a href="liste_formation.php">Liste Formation</a>
             <a href="#">Ajouter Formation</a>
             <a href="#">Fiche Formation</a>
             <a href="#">Generation Proforma</a>
