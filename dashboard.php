@@ -20,28 +20,7 @@ if (!isset($_SESSION['admin'])) {
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#factureModal" >Créer facture</button>
         </div>
         </section>
-        
-    <!-- popup formulaire pour ajout de formation-->
-    <div class="modal fade" id="formModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5>Nouvelle Formation</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="./traitement/save_formation.php" method="POST">
-                        <label>Nom formation</label>
-                        <input type="text" name="nom_formation" class="form-control mb-3">
-                        <label>Date</label>
-                        <input type="date" name="date" class="form-control mb-3">
-                        <button class="btn btn-success" name="btn_ajout">Enregistrer</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
+     
     <!-- popup formulaire pour creer une facture-->
     <div class="modal fade" id="factureModal">
         <div class="modal-dialog">
