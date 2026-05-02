@@ -160,3 +160,10 @@ transform:scale(1.05);
   text-align: justify;
   margin-top: 2vw;
 }
+.etape{
+    display: none;
+}
+
+.etape.active{
+    display: block;
+}

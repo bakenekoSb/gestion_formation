@@ -14,7 +14,7 @@
             <div class="closebtn" onclick="Menu()">✖️</div>
             <a href="dashboard.php">Dashboard</a>
             <a href="liste_formation.php">Liste Formation</a>
-            <a href="#">Ajouter Formation</a>
+            <a href="ajout_formation.php">Ajouter Formation</a>
             <a href="#">Fiche Formation</a>
             <a href="#">Generation Proforma</a>
             <a href="#">Generation Facture</a>
