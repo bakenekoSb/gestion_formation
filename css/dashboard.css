@@ -160,3 +160,38 @@ transform:scale(1.05);
 .etape.active{
     display: block;
 }
+/*Css pour formulaire de modification*/
+.modif_form {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    animation: fadeIn 0.3s ease;
+}
+
+.contenue_modif {
+    background: white;
+    padding: 20px;
+    width: 350px;
+    margin: 10% auto;
+    border-radius: 12px;
+    animation: slideUp 0.3s ease;
+}
+
+.action_modif {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes slideUp {
+    from {transform: translateY(30px);}
+    to {transform: translateY(0);}
+}

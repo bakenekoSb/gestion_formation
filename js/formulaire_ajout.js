@@ -10,12 +10,6 @@ function etapePrecedente(maintenant,precedente)
     document.getElementById("etape" + precedente).classList.add("active");
 }
 
-function etapeSuivante(maintenant,suivante)
-{
-    document.getElementById("etape" + maintenant).classList.remove("active");
-    document.getElementById("etape" + suivante).classList.add("active");
-}
-
 function annulerForm(){
     let confirmation = confirm("Voulez-vous annuler le formulaire ?");
 
