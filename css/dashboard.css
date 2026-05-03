@@ -44,14 +44,6 @@ font-size:14px;
 transition:0.5s;
 }
 
-.participant{
-background:#3498db;
-}
-
-.formateur{
-background:#2ecc71;
-}
-
 .modifier{
 background:#f39c12;
 }
@@ -82,6 +74,7 @@ transform:scale(1.05);
     border-radius: 5px;
 }
 
+/*teto no nataoko*/
 .sidebar {
     position: fixed;
     top: 0;

@@ -17,5 +17,5 @@
             <a href="ajout_formation.php">Ajouter Formation</a>
             <a href="#">Fiche Formation</a>
             <a href="#">Generation Proforma</a>
-            <a href="#">Generation Facture</a>
+            <a href="generation_facture.php">Generation Facture</a>
         </div>
