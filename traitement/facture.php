@@ -269,7 +269,7 @@ $total = $montant_service + $montant_indemnite + $tva_total;
 
 // Fonction formatage nombre
 function formatNumber($nb) {
-    return number_format($nb, 2, ',', ' ');
+    return number_format($nb, 2, ',', ' ');//2 chiffre apres virgule; ',' comme séparateur décimal et ' ' comme séparateur de milliers
 }
 
 /*
@@ -277,11 +277,24 @@ function formatNumber($nb) {
     $pdf->Cell(largeur, hauteur, texte, bordure, saut_ligne, alignement); pour ecrire un texte dans le 
     $pdf->MultiCell(0,10,'Texte très long...'); pour texte long qui peut occuper plusieurs lignes
     $pdf->Ln(5); //saut de ligne
-
+    $pdf ->Rect(x,y,w,h); pour dessiner un rectangle (bordure) : x et y (coordonnées du coin supérieur gauche), width (largeur) et height (hauteur)
+    
     Couleur
     texte: $pdf->SetTextColor(255,0,0); // rouge
     fond: $pdf->SetFillColor(200,220,255); // bleu clair
     bordure: $pdf->SetDrawColor(0,0,0);
+    pour Rect():
+    $pdf->SetFillColor(200, 200, 200); // gris
+    Remplissage
+    $pdf->Rect(10, 10, 50, 20, 'F');   // F = Fill
+    Contour
+    $pdf->SetDrawColor(255, 0, 0); // rouge
+    $pdf->Rect(10, 40, 50, 20, 'D');    // ou rien car D = Draw (par défaut)
+    remplissage+contour
+    $pdf->Rect(10, 70, 50, 20, 'DF');  // Draw + Fill ou 'FD'
+    
+    Epaisseur contour/bordure
+    $pdf->SetLineWidth(0.5); // 0.5mm d'épaisseur
     
     Generer/afficher le pdf
     $pdf->Output('D','facture.pdf'); // télécharger
@@ -318,7 +331,7 @@ $pdf->Cell(0,-45,'112021 007713',0,1,'C');
 $pdf->Cell(0,48,'Doit',0,1,'R');
 $pdf->SetFont('Arial','U',11);
 $pdf->Cell(0,-33,'Email:',0,1,);
-$pdf->SetTextColor(200,0,200);
+$pdf->SetTextColor(0,100,255);
 $pdf->Cell(0,33,'contact@gasy-tech.com',0,1,'C');
 $pdf->SetFont('Arial','',11);
 $pdf->SetTextColor(0,0,0);
@@ -327,7 +340,8 @@ $pdf->Cell(0,45,$adresse,0,1,'R');
 
 //prendre position de y
 $y = $pdf->GetY();
-//Rect(x,y,w,h) → bordure rectangle ;  et y (coordonnées du coin supérieur gauche), width (largeur) et height (hauteur)
+$pdf->SetDrawColor(0,150,200);
+$pdf->SetLineWidth(1);
 $pdf->Rect(50,$y-18, 120, 28);
 
 $pdf->SetFont('Arial','B',11);
@@ -350,6 +364,8 @@ $pdf->Ln(25);
 // ====================================
 // TABLEAU PRESTATIONS
 // ====================================
+$pdf->SetLineWidth(0);
+$pdf->SetDrawColor(0,0,0);
 // Définir les largeurs
 $pdf->SetWidths([100, 25, 30, 35]);
 $test = true;
@@ -419,4 +435,5 @@ if(isset($_POST['btn_apercu'])){
 }else if(isset($_POST['btn_telecharge'])){
     $pdf->Output('D',$filename); // télécharger
 }
+
 ?>
