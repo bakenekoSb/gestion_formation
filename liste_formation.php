@@ -38,7 +38,8 @@
                     <i class="fa-solid fa-pen-to-square"></i>
                 </button>
                 
-                <a class="btn supprimer" href="supprimer.php?id=<?php echo $ligne['id_formation']; ?>">
+                <a class="btn supprimer" href="supprimer.php?id=<?php echo $ligne['id_formation'];?>
+                "onclick="return confirm('Supprimer cette formation ?')">
                     <i class="fa-solid fa-trash"></i>
                 </a>
 
@@ -49,22 +50,22 @@
         } else {
             echo "Aucune formation";
         } ?>
-        
     </div>
 
+    <!--Formulaire pour la modification -->
     <div class="modif_form" id="modif_form">
             <div class="contenue_modif">
                 <form method="POST" action="modifier.php" onsubmit="return verifierForm()">
                         <input type="hidden" name="id" id="modif_id">
 
-                        <label>Titre</label>
-                        <input type="text" name="titre" id="modif_titre">
+                        <label for="modif_titre">Titre:</label><br>
+                        <input type="text" name="titre" id="modif_titre"><br><br>
 
-                        <label>Date</label>
-                        <input type="date" name="date_debut" id="modif_date">
+                        <labe for="modif_date">Date:</label><br>
+                        <input type="date" name="date_debut" id="modif_date"><br><br>
 
-                        <label>Capacité</label>
-                        <input type="number" name="capacite" id="modif_capacite">
+                        <label for="modif_capacité">Capacité:</label><br>
+                        <input type="number" name="capacite" id="modif_capacite"><br><br>
                         <div class="action_modif">
                             <button type="submit" name="update">Modifier</button>
                             <button type="button" onclick="fermerModif()">Annuler</button>

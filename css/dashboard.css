@@ -56,25 +56,7 @@ background:#e74c3c;
 opacity:0.8;
 transform:scale(1.05);
 }
-
-/*statut formation*/
-#disponible{
-    background-color: rgb(147, 233, 147);
-    padding: 5px 10px;
-    border-radius: 5px;
-}
-#indisponble{
-    background-color: rgb(240, 186, 11);
-    padding: 5px 10px;
-    border-radius: 5px;
-}
-#terminé{
-    background-color: rgb(238, 130, 130);
-    padding: 5px 10px;
-    border-radius: 5px;
-}
-
-/*teto no nataoko*/
+/*Css pour sidebar*/
 .sidebar {
     position: fixed;
     top: 0;
@@ -92,7 +74,6 @@ transform:scale(1.05);
     left: 0;
   }
 
-  /* Bouton fermer */
   .closebtn {
     position: absolute;
     top: 32px;
@@ -184,14 +165,4 @@ transform:scale(1.05);
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
-}
-
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
-}
-
-@keyframes slideUp {
-    from {transform: translateY(30px);}
-    to {transform: translateY(0);}
 }
