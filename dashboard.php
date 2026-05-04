@@ -6,9 +6,9 @@ if (!isset($_SESSION['admin'])) {
     header("Location: ./authentification/index.php");
     exit;
 }
+include 'includes/head.php';
+include 'includes/header.php'; 
 ?>
-    <?php include 'includes/head.php'; ?>
-    <?php include 'includes/header.php'; ?>
     <section class="section_pple">
         <div class="contenue_section">
 
