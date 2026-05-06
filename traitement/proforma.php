@@ -27,7 +27,7 @@ class PDF extends FPDF {
     }
 
     // Fonction principale pour afficher une ligne
-    function Row($data) {
+    function Row($data,$test) {
         $nb = 0;
 
         // Calcul du nombre de lignes max
@@ -45,7 +45,7 @@ class PDF extends FPDF {
             $x = $this->GetX();
             $y = $this->GetY();
 
-            if($data[$i]!= ""){
+            if($data[$i]!= "" || $test == true){
                 // Bordure
                 $this->Rect($x, $y, $w, $h);
             }
@@ -219,128 +219,82 @@ $pdf->Ln(2);
 // =====================
 // TABLEAU
 // =====================
+$test = true;
 $pdf->SetWidths([40, 60, 20, 30, 30]);
 
 $pdf->SetFont('Arial','B',11);
 // En-tête
-$pdf->Row(["Ref.", "Description", "Duree", "Prix (Ar)", "Total (Ar)"]);
+$pdf->Row(["Ref.", "Description", "Duree", "Prix (Ar)", "Total (Ar)"],$test);
 
 $pdf->SetFont('Arial','',10);
 //données
-$pdf->Row(["IA", "Formation: l'IA appliquee aux metiers", "5 jours", "160 000", "800 000"]);
-$pdf->Row(["REPAS/TRANSPORT", "Indemnite de repas et transport", "5 jours", "5 000", "25 000"]);
-/*
-$pdf->SetFont('Arial','B',9);
+$pdf->Row(["IA", "Formation: l'IA appliquee aux metiers", "5 jours", "160 000", "800 000"],$test);
+$pdf->Row(["REPAS/TRANSPORT", "Indemnite de repas et transport", "5 jours", "5 000", "25 000"],$test);
 
-$w = [20, 70, 20, 30, 30];
-
-$pdf->Cell($w[0],8,'Ref',1);
-$pdf->Cell($w[1],8,'Description',1);
-$pdf->Cell($w[2],8,'Duree',1);
-$pdf->Cell($w[3],8,'Prix (Ar)',1);
-$pdf->Cell($w[4],8,'Total (Ar)',1);
-$pdf->Ln();
-
-// =====================
-// LIGNE 1 (MultiCell PROPRE)
-// =====================
-$pdf->SetFont('Arial','',9);
-
-$y = $pdf->GetY();
-
-$pdf->MultiCell($w[0],8,'IA',1);
-$x = $pdf->GetX();
-$pdf->SetXY(10 + $w[0], $y);
-
-$pdf->MultiCell($w[1],8,"Formation : l'IA appliquee aux metiers",1);
-$pdf->SetXY(10 + $w[0] + $w[1], $y);
-
-$pdf->MultiCell($w[2],8,'5 jours',1);
-$pdf->SetXY(10 + $w[0] + $w[1] + $w[2], $y);
-
-$pdf->MultiCell($w[3],8,'160 000',1);
-$pdf->SetXY(10 + $w[0] + $w[1] + $w[2] + $w[3], $y);
-
-$pdf->MultiCell($w[4],8,'800 000',1);
-
-// =====================
-// LIGNE 2
-// =====================
-$y = $pdf->GetY();
-
-$pdf->MultiCell($w[0],8,'REPAS',1);
-$pdf->SetXY(10 + $w[0], $y);
-
-$pdf->MultiCell($w[1],8,"Indemnite de repas et transport",1);
-$pdf->SetXY(10 + $w[0] + $w[1], $y);
-
-$pdf->MultiCell($w[2],8,'5 jours',1);
-$pdf->SetXY(10 + $w[0] + $w[1] + $w[2], $y);
-
-$pdf->MultiCell($w[3],8,'5 000',1);
-$pdf->SetXY(10 + $w[0] + $w[1] + $w[2] + $w[3], $y);
-
-$pdf->MultiCell($w[4],8,'25 000',1);
-
-$pdf->Ln(5);
-*/
-// =====================
+/* =====================
 // TOTAL
-// =====================
+GetStringWidth(): calcul la longueur exacte d'un texte
+// =====================*/
 $pdf->Ln(15);
 $x = $pdf->GetX();
 $y = $pdf->GetY();
 
 $pdf->SetFont('Arial','B',10);
 $pdf->Cell(0,0,'TOTAL GENERAL',0,1);
-
-$pdf->Cell(0,5,'Montant total HT :',0,0);
-$pdf->Cell(0,5,'825 000 Ar',0,1);
-/*
-$pdf->Cell(120,8,'',0);
-$pdf->Cell(40,8,'TVA (20%) :',0);
-$pdf->Cell(30,8,'165 000 Ar',0,1);
-
-$pdf->Cell(120,8,'',0);
-$pdf->Cell(40,8,'Montant total TTC :',0);
-$pdf->Cell(30,8,'990 000 Ar',0,1);
-
-$pdf->Ln(5);
+$pdf->Ln(7);
+$pdf->SetFont('Arial','',10);
+$pdf->Cell(30,0,'Montant total HT : 825 000 Ar',0,1);
+//$pdf->Cell(0,0,'825 000 Ar',0,1);
+$pdf->Cell(15,10,'TVA (20%) : 165 000 Ar',0,1);
+$pdf->SetFont('Arial','B',10);
+$pdf->SetFillColor(255,255,0);
+$pdf->Cell(35,5,'Montant total TTC : ',0,0,'',true);
+$text = '990 000 Ar';
+$w = $pdf->GetStringWidth($text) + 2; // + marge interne(padding)
+$pdf->Cell($w,5,$text,0,1,'',true);
+$pdf->Ln(10);
 
 // =====================
 // CONDITIONS
 // =====================
 $pdf->SetFont('Arial','B',10);
-$pdf->Cell(0,6,'CONDITIONS',0,1);
-
-$pdf->SetFont('Arial','',8);
-
-$pdf->MultiCell(0,4,
-"1. Cette facture proforma ne constitue pas une facture definitive.
-
-2. Si le nombre de participants depasse 25 personnes, un supplement sera facture.
-
-3. 100% du montant doit etre regle sous 60 jours.
-
-4. Penalite de 40 000 Ar par jour de retard.
-
-5. Validation par email obligatoire avant la formation.
-
-6. Modes de paiement :
-- Virement bancaire (BRED Madagasikara)
-- Orange Money
-
-7. Annulation : paiement obligatoire meme en cas de non-participation.
-
-8. Formation assuree a l'Orange Digital Center."
-);
-
-$pdf->Ln(10);
+$pdf->Cell(0,0,'CONDITIONS',0,1);
+$pdf->Ln(3);
+$pdf->SetFont('Arial','',10);
+$conditions = [
+    "1. Cette facture proforma ne constitue pas une facture définitive.",
+    "2. Si le nombre de participants inscrits dépasse vingt-cinq (25) personnes, un supplément de cent mille (100 000) Ariary par jour sera facturé afin de couvrir les frais additionnels. De plus, un formateur supplémentaire sera mobilisé par nos soins afin de garantir un encadrement pédagogique optimal.",
+    "3. 100% du montant total doit être réglé au plus tard 60 jours après la fin de la formation.",
+    "4. Si le paiement n'est pas effectué dans les 60 jours suivant la fin de la formation, une pénalité de 40 000 Ar par jour de retard sera appliquée, à compter du jour suivant la fin de la formation et jusqu'au règlement complet du paiement.",
+    "5. La formation débutera uniquement après réception de l'e-mail de validation, lequel devra être envoyé au plus tard trois (3) jours avant la date de début de la formation.",
+    "6. Modes de paiement acceptés",
+    "   • Virement bancaire :",
+    "       ➢ BANQUE : BRED Madagasikara",
+    "       ➢ RIB : 00008 00024 05003023618 71",
+    "       ➢ NOM : GASY TECH",
+    "   • Paiement par Orange Money au numéro 032 05 504 93 (Les frais de retrait seront à la charge du client et ajoutés au montant total à régler).",
+    "7. Annulation et paiement en cas de non-participation :",
+    "   • En cas d'annulation du contrat de la part du client, le paiement complet devra être effectué après la date de formation prévue, même si la formation n'a pas eu lieu.",
+    "   • Aucune formation ne pourra être remboursée en cas d'annulation à moins d'une situation exceptionnelle validée par Gasy Tech.",
+    "8. La formation sera assurée par un formateur qualifié et se déroulera à l'Orange Digital Center, situé à la Gare Soarano."
+];
+foreach ($conditions as $condition) {
+    // Vérifier si on approche du bas de page
+    if ($pdf->GetY() > 260) {
+        $pdf->AddPage();
+    }
+    $pdf->Cell(6,7,'',0,0);
+    $pdf->MultiCell(0, 7, $condition, 0);
+    $pdf->Ln(2);
+}
 
 // =====================
 // SIGNATURE
 // =====================
-$pdf->Cell(0,5,'Signature',0,1,'R');
-*/
+$pdf->Ln(40);
+$pdf->Cell(310,5,'Signature',0,1,'C');
+$pdf->Ln(20);
+$pdf->Cell(0,5,'RAMAHEFARITOLOTRA Rafaly Antoni',0,1,'R');
+
 $pdf->Output();
 ?>

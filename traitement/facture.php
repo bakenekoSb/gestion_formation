@@ -236,7 +236,6 @@ function nombreEnLettres($nombre){
 $date_facture = date('d/m/Y');
 $date1 = date('Y-m');
 $client = $_POST['nom'];
-$client = $_POST['nom'];
 $adresse = $_POST['adresse'];
 $montant_unitaire = (double)($_POST['prix']);
 $indemnite = (double)($_POST['indemnite']);
@@ -299,7 +298,8 @@ function formatNumber($nb) {
     Generer/afficher le pdf
     $pdf->Output('D','facture.pdf'); // télécharger
     $pdf->Output('F','facture.pdf'); // sauvegarder
-    $pdf->Output();//s'ouvre dans le navigateur selon la configuration
+    $pdf->Output();//s'ouvre dans le navigateur (ou 'I' selon la configuration)
+    $pdf->Output('S');//retourne le PDF sous forme de chaîne (string)
 
 */
 
